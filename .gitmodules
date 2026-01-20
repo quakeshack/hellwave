@@ -1,0 +1,12 @@
+[submodule "engine"]
+	path = engine
+	url = ../engine
+[submodule "game"]
+	path = game
+	url = ../game
+[submodule "hellwave-data"]
+	path = hellwave-data
+	url = ../hellwave-data
+[submodule "hellwave-game"]
+	path = hellwave-game
+	url = ../hellwave-game
