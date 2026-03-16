@@ -202,3 +202,14 @@ make upload
 - `engine/README.md`: QuakeShack engine details
 - `hellwave-data/Makefile`: map compilation details
 - top-level `Makefile`: CI and packaging orchestration
+
+## Credits and Licensing
+
+This meta-repository assembles and packages work from several upstream projects, and redistribution should preserve their attribution and license terms.
+
+- `engine/` is QuakeShack, the engine used to build and run the packaged game. The engine repository declares `GPL-2.0-only`; see `engine/package.json` and `engine/LICENSE`.
+- `tools/ericw-tools/` is the ericw-tools map compiler suite used for BSP and lighting builds. Its README states it is licensed under the GNU GPL version 2 or, at your option, any later version. Builds using Embree are noted there as GPLv3+ for Apache-license compatibility.
+- `librequake-data/` provides the LibreQuake base runtime assets used by this package. LibreQuake's asset set is covered by the BSD 3-Clause license; those assets remain credited to and governed by the LibreQuake project's copyright, license, and contributor notices.
+- `hellwave-game/` and `hellwave-data/` contain the Hellwave-specific game code and content packaged by this repository.
+
+In short, this repository should be treated as build and packaging glue around separately licensed components rather than as a single-license distribution.
