@@ -51,11 +51,11 @@ assets: engine maps
 	rsync -av --delete engine/dist/browser/ dist/
 	rsync -av engine/data/librequake/gfx dist/assets/
 	rsync -av engine/data/librequake/progs dist/assets/
+	rsync -av engine/data/librequake/music dist/assets/
 	rsync -av engine/data/librequake/sound dist/assets/
 	rsync -av engine/data/librequake/gfx.wad dist/assets/
 	rsync -av engine/data/librequake/maps/b_*.bsp dist/assets/maps/
 	rsync -av engine/data/id1/*.cfg dist/assets/
-	rsync -av engine/data/id1/music dist/assets/
 	rsync -av engine/data/hellwave/autoexec.cfg dist/assets/
 	rsync -av engine/data/hellwave/better-quake.rc dist/assets/
 	rsync -av engine/data/hellwave/client.cfg dist/assets/

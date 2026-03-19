@@ -203,6 +203,18 @@ make upload
 - `hellwave-data/Makefile`: map compilation details
 - top-level `Makefile`: CI and packaging orchestration
 
+## Misc.
+
+### Music
+
+The music is taken from LibreQuake and converted from ogg to opus.
+
+```sh
+for i in $(seq 2 11); do
+  ffmpeg -i "$(printf "track%02d.ogg" "$i")" -c:a libopus -b:a 128k $i.opus
+done
+```
+
 ## Credits and Licensing
 
 This meta-repository assembles and packages work from several upstream projects, and redistribution should preserve their attribution and license terms.
