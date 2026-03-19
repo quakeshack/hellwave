@@ -1,4 +1,4 @@
-.PHONY: all clean link link-hellwave link-librequake deps engine maps assets upload
+.PHONY: all clean link link-hellwave link-librequake deps engine maps assets upload update
 
 VITE_CDN_URL_PATTERN ?= https://hw-assets-{shard}.quakeshack.dev/assets/{filename}
 VITE_SIGNALING_URL ?= wss://master.quakeshack.dev/signaling
@@ -79,3 +79,7 @@ upload:
 		--delete \
 		$(if $(strip $(S3_ENDPOINT_URL)),--endpoint-url "$(S3_ENDPOINT_URL)") \
 		dist/ s3://$(S3_BUCKET)$(if $(strip $(S3_PREFIX)),/$(S3_PREFIX))/
+
+update:
+	git submodule update --init --recursive --remote
+	git add -A
