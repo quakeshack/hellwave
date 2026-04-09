@@ -55,8 +55,9 @@ It currently expands to:
 1. `deps`: run `npm ci` in `engine/`
 2. `link`: symlink Hellwave and LibreQuake data into the engine tree
 3. `engine`: build the browser client in `engine/dist/browser/`
-4. `maps`: compile BSPs and navigation files for Hellwave maps
-5. `assets`: assemble the final distributable tree in `dist/`
+4. `dedicated`: build the dedicated server in `engine/dist/dedicated/`
+5. `maps`: compile BSPs and navigation files for Hellwave maps
+6. `assets`: assemble the final distributable tree in `dist/`
 
 In Jenkins, the simplest pipeline step should just be:
 
@@ -158,10 +159,11 @@ Hellwave map compilation is delegated to `hellwave-data/Makefile`, but the top-l
 
 - `BASEDIR=../librequake`
 - `TOOLS_DIR=../tools/ericw-tools`
-- `DEDICATED="node --preserve-symlinks --preserve-symlinks-main ../engine/dedicated.mjs"`
+- `DEDICATED="node --preserve-symlinks --preserve-symlinks-main ../engine/dist/dedicated/dedicated.mjs"`
 
 Those overrides matter because:
 
+- the dedicated server must be built first on the TypeScript branch so nav generation can execute the generated `dist/dedicated/dedicated.mjs`
 - the dedicated server needs symlink preservation to load `hellwave-game/` correctly
 - nav generation must boot with the requested map
 - nav generation must resolve LibreQuake assets as the base game data

@@ -1,4 +1,4 @@
-.PHONY: all clean link link-hellwave link-librequake deps engine maps assets upload update
+.PHONY: all clean link link-hellwave link-librequake deps engine dedicated maps assets upload update
 
 VITE_CDN_URL_PATTERN ?= https://hw-assets-{shard}.quakeshack.dev/assets/{filename}
 VITE_SIGNALING_URL ?= wss://master.quakeshack.dev/signaling
@@ -32,10 +32,17 @@ engine: deps link
 		VITE_PRESERVE_SYMLINKS=true \
 		npm run build:production
 
+# build the dedicated server used for nav generation
+dedicated: deps link
+	cd engine && \
+		VITE_GAME_DIR=hellwave \
+		VITE_PRESERVE_SYMLINKS=true \
+		npm run dedicated:build:production
+
 # bake hellwave maps
-maps: link
+maps: dedicated
 	make -w -C engine/data/hellwave \
-		DEDICATED="node --preserve-symlinks --preserve-symlinks-main ../engine/dedicated.mjs" \
+		DEDICATED="node --preserve-symlinks --preserve-symlinks-main ../engine/dist/dedicated/dedicated.mjs" \
 		TOOLS_DIR=../tools/ericw-tools \
 		BASEDIR=../librequake \
 		all

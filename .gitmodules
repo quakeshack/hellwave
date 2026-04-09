@@ -1,12 +1,15 @@
 [submodule "engine"]
 	path = engine
 	url = ../engine
+	branch = typescript
 [submodule "game"]
 	path = game
 	url = ../game
+	branch = typescript
 [submodule "hellwave-data"]
 	path = hellwave-data
 	url = ../hellwave-data
 [submodule "hellwave-game"]
 	path = hellwave-game
 	url = ../hellwave-game
+	branch = typescript
