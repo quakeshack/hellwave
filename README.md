@@ -69,6 +69,7 @@ make all
 
 - `make deps`: install engine npm dependencies
 - `make link`: refresh the engine symlinks for game and data repos
+- `make test`: run the engine test suite, including vendored game tests
 - `make engine`: build the browser client only
 - `make maps`: rebuild Hellwave BSP and NAV files
 - `make assets`: rebuild the distributable `dist/` tree

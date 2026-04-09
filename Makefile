@@ -1,4 +1,4 @@
-.PHONY: all clean link link-hellwave link-librequake deps engine dedicated maps assets upload update
+.PHONY: all clean link link-hellwave link-librequake deps test engine dedicated maps assets upload update
 
 VITE_CDN_URL_PATTERN ?= https://hw-assets-{shard}.quakeshack.dev/assets/{filename}
 VITE_SIGNALING_URL ?= wss://master.quakeshack.dev/signaling
@@ -22,6 +22,13 @@ link-hellwave:
 
 link-librequake:
 	cd engine/data && ln -sfnv ../../librequake-data librequake
+
+# run the engine and vendored game tests
+test: deps link
+	@set -e; \
+		trap 'rm -f source/game/hellwave' EXIT; \
+		cd engine; \
+		npm test
 
 # build the engine (games need to be linked first)
 engine: deps link
