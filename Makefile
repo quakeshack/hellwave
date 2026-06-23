@@ -78,11 +78,11 @@ assets: engine maps
 	rsync -av engine/data/hellwave/gfx dist/assets/
 	rsync -av engine/data/hellwave/sound dist/assets/
 	rsync -av engine/data/hellwave/textures dist/assets/
+	rsync -av engine/data/hellwave/materials dist/assets/
 	rsync -av \
 		--include='*.bsp' \
 		--include='*.nav' \
 		--include='*.lit' \
-		--include='*.qsmat.json' \
 		--exclude='*' \
 		engine/data/hellwave/maps/ dist/assets/maps/
 
