@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="lightpreview" href="lightpreview.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="BSPX Lumps" href="bspx.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
         <title>Changelog - ericw-tools documentation</title>
@@ -219,6 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="bsputil.html">bsputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maputil.html">maputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lightpreview.html">lightpreview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bspx.html">BSPX Lumps</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Changelog</a></li>
 </ul>
 
@@ -262,10 +263,49 @@
         <article role="main" id="furo-main-content">
           <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading">¶</a></h1>
-<section id="alpha10">
-<h2>2.0.0-alpha10<a class="headerlink" href="#alpha10" title="Link to this heading">¶</a></h2>
+<section id="alpha11">
+<h2>2.0.0-alpha11<a class="headerlink" href="#alpha11" title="Link to this heading">¶</a></h2>
 <section id="changes">
 <h3>Changes<a class="headerlink" href="#changes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>common: disable color codes where stdout is not a TTY</p></li>
+<li><p>common: ENABLE_WRAP_AT_EOL_OUTPUT for console wrapping on Windows</p></li>
+<li><p>qbsp: <a class="reference internal" href="qbsp.html#cmdoption-qbsp-wrbrushes"><code class="xref std std-option docutils literal notranslate"><span class="pre">qbsp</span> <span class="pre">-wrbrushes</span></code></a> no longer implies contented bmodels (<a class="reference external" href="https://github.com/ericwa/ericw-tools/issues/467">https://github.com/ericwa/ericw-tools/issues/467</a>)</p></li>
+</ul>
+</section>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>lightpreview: file dialogs now remember the last used directory</p></li>
+<li><p>lightpreview: add Face panel which shows info on the clicked face</p></li>
+<li><p>qbsp: Half-Life: support <code class="docutils literal notranslate"><span class="pre">!</span></code> prefix for liquids, as well as <code class="docutils literal notranslate"><span class="pre">!cur_</span></code> water current contents</p></li>
+<li><p>light: support for new <code class="docutils literal notranslate"><span class="pre">LIGHTGRIDS</span></code> BSPX lump (<a class="reference internal" href="light.html#cmdoption-light-lightgrid_format"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-lightgrid_format</span></code></a> <code class="docutils literal notranslate"><span class="pre">lightgrids</span></code>)</p></li>
+<li><p>lightpreview: added a visualization for lightgrids (“Draw Lightgrid” checkbox)</p></li>
+<li><p>light: support Half-Life style <a class="reference internal" href="light.html#light-key-light"><code class="xref std std-light-key docutils literal notranslate"><span class="pre">light</span></code></a> fields where the value is <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">g</span> <span class="pre">b</span> <span class="pre">brightness</span></code> or <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">g</span> <span class="pre">b</span></code> instead
+of the ususal <code class="docutils literal notranslate"><span class="pre">brightness</span></code></p></li>
+</ul>
+</section>
+<section id="bug-fixes">
+<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>bsputil: fix <a class="reference internal" href="bsputil.html#cmdoption-bsputil-svg"><code class="xref std std-option docutils literal notranslate"><span class="pre">bsputil</span> <span class="pre">--svg</span></code></a> option parsing</p></li>
+<li><p>light: fix lightgrids to only receive on light channel 1</p></li>
+<li><p>qbsp: handle <a class="reference internal" href="qbsp.html#classname-func_detail_fence"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_fence</span></code></a> + <a class="reference internal" href="qbsp.html#classname-func_illusionary_visblocker"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_illusionary_visblocker</span></code></a> in q1</p></li>
+<li><p>maputil: fix conversion to Valve texture format leaving the “rotate” field uninitialized</p></li>
+<li><p>qbsp: fix crash on <code class="docutils literal notranslate"><span class="pre">nan</span></code> in the texture offset component of Valve 220 .map format</p></li>
+<li><p>qbsp: further <a class="reference internal" href="qbsp.html#classname-func_detail_fence"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_fence</span></code></a> fixes following on alpha10’s. This last fix only affects engines
+that frustum-cull leaf bounds.</p></li>
+<li><p>light: fix <a class="reference internal" href="light.html#worldspawn-key-_bouncecolorscale"><code class="xref std std-worldspawn-key docutils literal notranslate"><span class="pre">_bouncecolorscale</span></code></a> being ignored (only worked if specified on command-line).
+regression from 0.18 (<a class="reference external" href="https://github.com/ericwa/ericw-tools/issues/424">https://github.com/ericwa/ericw-tools/issues/424</a>).</p></li>
+<li><p>light: fix using <a class="reference internal" href="light.html#light-key-delay"><code class="xref std std-light-key docutils literal notranslate"><span class="pre">delay</span></code></a> <code class="docutils literal notranslate"><span class="pre">4</span></code> (local minlight) + <a class="reference internal" href="light.html#light-key-_light_channel_mask"><code class="xref std std-light-key docutils literal notranslate"><span class="pre">_light_channel_mask</span></code></a> together on the same
+light entity</p></li>
+</ul>
+</section>
+</section>
+<section id="alpha10">
+<h2>2.0.0-alpha10<a class="headerlink" href="#alpha10" title="Link to this heading">¶</a></h2>
+<section id="id1">
+<h3>Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <ul>
 <li><p>qbsp: <code class="docutils literal notranslate"><span class="pre">.texinfo.json</span></code> file is always written (simplifies passing data between qbsp and vis/light)</p></li>
 <li><p>light: switchable shadow casters now self-shadow when the switchable shadow is off.</p>
@@ -275,8 +315,8 @@ where the bmodel is hidden when the shadow turns off.</p>
 </li>
 </ul>
 </section>
-<section id="features">
-<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<section id="id2">
+<h3>Features<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>vis: support <a class="reference internal" href="vis.html#bmodel-key-_noambient"><code class="xref std std-bmodel-key docutils literal notranslate"><span class="pre">_noambient</span></code></a> on func_group to selectively disable ambient sounds from the grouped brushes</p></li>
 <li><p>light: allow <a class="reference internal" href="light.html#cmdoption-light-hdr"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-hdr</span></code></a>, <a class="reference internal" href="light.html#cmdoption-light-bspxhdr"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-bspxhdr</span></code></a>, <a class="reference internal" href="light.html#cmdoption-light-lux"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-lux</span></code></a>, <a class="reference internal" href="light.html#cmdoption-light-bspxlux"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-bspxlux</span></code></a>
@@ -284,8 +324,8 @@ on Q2 BSP’s. These are experimental in Q2 and not yet supported by any engines
 be viewed in lightpreview with Q2 BSP’s.</p></li>
 </ul>
 </section>
-<section id="bug-fixes">
-<h3>Bug fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<section id="id3">
+<h3>Bug fixes<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <ul>
 <li><p>qbsp: Fix <a class="reference internal" href="qbsp.html#classname-func_detail_fence"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_fence</span></code></a> causing “grey flash” on winquke, FTEQW, and others (but not Fitz/QS), for
 faces embedded inside the <a class="reference internal" href="qbsp.html#classname-func_detail_fence"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_fence</span></code></a>’s volume.</p>
@@ -309,8 +349,8 @@ in all engines.</p>
 </section>
 <section id="alpha9">
 <h2>2.0.0-alpha9<a class="headerlink" href="#alpha9" title="Link to this heading">¶</a></h2>
-<section id="id1">
-<h3>Changes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="id4">
+<h3>Changes<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>qbsp: never merge across liquids, deprecate <code class="docutils literal notranslate"><span class="pre">-nomergeacrossliquids</span></code></p></li>
 <li><p>qbsp: remove treating <code class="docutils literal notranslate"><span class="pre">__TB_empty</span></code> as skip</p></li>
@@ -318,8 +358,8 @@ in all engines.</p>
 <li><p>macOS builds now compiled on macOS 14</p></li>
 </ul>
 </section>
-<section id="id2">
-<h3>Features<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<section id="id5">
+<h3>Features<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>light: add <a class="reference internal" href="light.html#worldspawn-key-_surflight_atten"><code class="xref std std-worldspawn-key docutils literal notranslate"><span class="pre">_surflight_atten</span></code></a> key, supported on worldspawn/func_group/func_detail/etc.</p></li>
 <li><p>light: add <a class="reference internal" href="light.html#light-key-_switchableshadow_target"><code class="xref std std-light-key docutils literal notranslate"><span class="pre">_switchableshadow_target</span></code></a></p></li>
@@ -327,8 +367,8 @@ in all engines.</p>
 <li><p>lightpreview: add “view -&gt; move camera to” menu item, show Q2 area in statusbar</p></li>
 </ul>
 </section>
-<section id="id3">
-<h3>Bug fixes<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h3>Bug fixes<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>qbsp: fix bmodel bounds for bmodels that mix <code class="docutils literal notranslate"><span class="pre">clip</span></code> and non-<code class="docutils literal notranslate"><span class="pre">clip</span></code> brushes</p></li>
 <li><p>qbsp: fix software renderer compatibility (only reuse edges once)</p></li>
@@ -346,8 +386,8 @@ in all engines.</p>
 </section>
 <section id="alpha8">
 <h2>2.0.0-alpha8<a class="headerlink" href="#alpha8" title="Link to this heading">¶</a></h2>
-<section id="id4">
-<h3>Changes<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<section id="id7">
+<h3>Changes<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>light: invalid “delay” settings are now a warning rather than a fatal error</p></li>
 <li><p>qbsp: q2: write out true leaf contents even if CONTENTS_SOLID is set. Previous
@@ -355,15 +395,15 @@ behaviour (including original qbsp3 compiler) was that CONTENTS_SOLID would
 clear any other set contents bits in leafs (but not in brushes.) (#420)</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>Features<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<section id="id8">
+<h3>Features<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>lightpreview: show leaf contents in status bar</p></li>
 <li><p>light: LIGHTING_E5BGR9 + HDR .lit support (from &#64;dsvensson and &#64;Shpoike)</p></li>
 </ul>
 </section>
-<section id="id6">
-<h3>Bug fixes<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<section id="id9">
+<h3>Bug fixes<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>light: fix “mangle” on _sun 1 entities (#266)</p></li>
 <li><p>light: fix sunlight artifacts (21b3b696)</p></li>
@@ -373,23 +413,23 @@ clear any other set contents bits in leafs (but not in brushes.) (#420)</p></li>
 </section>
 <section id="alpha7">
 <h2>2.0.0-alpha7<a class="headerlink" href="#alpha7" title="Link to this heading">¶</a></h2>
-<section id="id7">
-<h3>Changes<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id10">
+<h3>Changes<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>light: q2: opaque lit liquids receive light from both sides by default (specifically if they have the “warp” surf
 flag)</p></li>
 <li><p>qbsp: remove broken <code class="docutils literal notranslate"><span class="pre">-transsky</span></code> feature</p></li>
 </ul>
 </section>
-<section id="id8">
-<h3>Features<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<section id="id11">
+<h3>Features<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>bsputil: gained <code class="docutils literal notranslate"><span class="pre">--svg</span></code> export</p></li>
 <li><p>lightpreview: add camera bookmarks, stats panel with BSP lump sizes</p></li>
 </ul>
 </section>
-<section id="id9">
-<h3>Bug fixes<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<section id="id12">
+<h3>Bug fixes<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>qbsp: fix “sides not found” warning spam on Q1 maps with sky</p></li>
 <li><p>light: fix <code class="docutils literal notranslate"><span class="pre">-dirtdebug</span></code> causing a .lit file to be generated in Q2 mode</p></li>
@@ -444,6 +484,126 @@ only welds to itself.</p>
 <li><p>Documentation is now at: <a class="reference external" href="https://ericw-tools.readthedocs.io">https://ericw-tools.readthedocs.io</a></p></li>
 </ul>
 </section>
+<section id="alpha5">
+<h2>2.0.0-alpha5<a class="headerlink" href="#alpha5" title="Link to this heading">¶</a></h2>
+<p>This is the fifth alpha release of our 2.0.0 “dev builds”.</p>
+<p>The old stable v0.18.2-rc1 release still has more optimized output for Q1 and faster/less memory use for qbsp/light, but we’re working on regressions and welcome feedback as we work towards a stable 2.0.0 build.</p>
+<p>Fixes since alpha4:</p>
+<ul class="simple">
+<li><p>qbsp: fix for Q2 animated textures</p></li>
+<li><p>qbsp: fix leaks through detail in LibreQuake e3m4.map</p></li>
+<li><p>light: fix entire lightmap turning black in some cases when using _surface lights</p></li>
+<li><p>light: fix excessive bouncing with lit water, or <a class="reference internal" href="light.html#bmodel-key-_shadow"><code class="xref std std-bmodel-key docutils literal notranslate"><span class="pre">_shadow</span></code></a> -1</p></li>
+<li><p>lightpreview: don’t crash when vis is run more than once</p></li>
+</ul>
+<p>Enhancements since alpha4:</p>
+<ul class="simple">
+<li><p>vis: more performance (gmsp3v2.bsp vis, 32 threads: 18.2s -&gt; 10.6s) (&#64;rrika)</p></li>
+</ul>
+<p>Additions since alpha4:</p>
+<ul class="simple">
+<li><p>qbsp: add <a class="reference internal" href="qbsp.html#cmdoption-qbsp-missing_textures_as_zero_size"><code class="xref std std-option docutils literal notranslate"><span class="pre">qbsp</span> <span class="pre">-missing_textures_as_zero_size</span></code></a> flag to allow writing 0x0 textures</p></li>
+<li><p>lightpreview: bind arrow keys / pageup / pagedown in addition to WASDQE (&#64;maikmerten)</p></li>
+<li><p>lightpreview: add support for fence textures (#402) (&#64;dsvensson)</p></li>
+<li><p>lightpreview: frustum culling and cull freeze (#398) (&#64;dsvensson)</p></li>
+</ul>
+<p>Other notes:</p>
+<ul class="simple">
+<li><p>VS runtime for the Windows builds: <a class="reference external" href="https://aka.ms/vs/17/release/vc_redist.x64.exe">https://aka.ms/vs/17/release/vc_redist.x64.exe</a></p></li>
+<li><p>Documentation is now at: <a class="reference external" href="https://ericw-tools.readthedocs.io">https://ericw-tools.readthedocs.io</a></p></li>
+</ul>
+</section>
+<section id="alpha4">
+<h2>2.0.0-alpha4<a class="headerlink" href="#alpha4" title="Link to this heading">¶</a></h2>
+<p>This is the fourth alpha release of our 2.0.0 “dev builds”.</p>
+<p>The old stable v0.18.2-rc1 release still has more optimized output for Q1 and faster/less memory use for qbsp/light, but we’re working on regressions (this alpha fixes <cite>vis</cite> performance) and welcome feedback as we work towards a stable 2.0.0 build.</p>
+<p>Fixes since alpha3:</p>
+<ul class="simple">
+<li><p>qbsp: fix <a class="reference internal" href="qbsp.html#cmdoption-qbsp-notex"><code class="xref std std-option docutils literal notranslate"><span class="pre">qbsp</span> <span class="pre">-notex</span></code></a> (88885068212f608e4c635d5775656962b908af31)</p></li>
+<li><p>qbsp: fix <a class="reference internal" href="qbsp.html#classname-func_detail_illusionary"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_illusionary</span></code></a> and <code class="docutils literal notranslate"><span class="pre">misc_external_map</span></code> with <a class="reference internal" href="qbsp.html#cmdoption-qbsp-wrbrushes"><code class="xref std std-option docutils literal notranslate"><span class="pre">qbsp</span> <span class="pre">-wrbrushes</span></code></a> (#371, #372)</p></li>
+</ul>
+<p>Enhancements since alpha3:</p>
+<ul class="simple">
+<li><p>vis: major performance fixes (gmsp3v2.bsp vis went from 153s to 18.5s with 32 threads)</p></li>
+<li><p>light: some performance fixes for large maps using point lights (<code class="docutils literal notranslate"><span class="pre">light.exe</span> <span class="pre">-visapprox</span> <span class="pre">none</span> <span class="pre">ad_sepulcher.bsp</span></code> went from 45.5s to 22.7s) (22ad2f4141723b492f5fd10ce529d6b9e8e67b3a)</p></li>
+</ul>
+<p>Additions since alpha3:</p>
+<ul class="simple">
+<li><p>qbsp: allow empty brushes in .map files (#391)</p></li>
+<li><p>light: compiling with embree 4 is now supported in addition to 3</p></li>
+<li><p>bsputil: add <a class="reference internal" href="bsputil.html#cmdoption-bsputil-replace-textures"><code class="xref std std-option docutils literal notranslate"><span class="pre">bsputil</span> <span class="pre">--replace-textures</span></code></a> for updating textures in a Q1 bsp</p></li>
+<li><p>lightpreview: add support for Q1 visdata</p></li>
+<li><p>lightpreview: add checkbox for skipping running light</p></li>
+<li><p>lightpreview: fix large .bsp’s not rendering (de0f66c16e66de8c27fb49090190441927ef3001)</p></li>
+</ul>
+<p>Other notes:</p>
+<ul class="simple">
+<li><p>VS runtime for the Windows builds: <a class="reference external" href="https://aka.ms/vs/17/release/vc_redist.x64.exe">https://aka.ms/vs/17/release/vc_redist.x64.exe</a></p></li>
+<li><p>Documentation is now at: <a class="reference external" href="https://ericw-tools.readthedocs.io">https://ericw-tools.readthedocs.io</a></p></li>
+</ul>
+</section>
+<section id="alpha3">
+<h2>2.0.0-alpha3<a class="headerlink" href="#alpha3" title="Link to this heading">¶</a></h2>
+<p>This is the third alpha release of our 2.0.0 “dev builds”.</p>
+<p>Quake mappers will probably want to stick to the previous v0.18.2-rc1 release, as we’re still working on regressions in compile time and output quality.</p>
+<p>Fixes since alpha2:</p>
+<ul class="simple">
+<li><p>lightpreview: don’t crash on Q1 maps with missing textures</p></li>
+<li><p>light: fix broken sunlight in Q1 maps (#376)</p></li>
+<li><p>qbsp: Q2: fix corruption if texture name exceeds 31 chars (8362ffa3851d4c4df91b74aef2a20dddfccfab95)</p></li>
+</ul>
+<p>Additions since alpha2:</p>
+<ul class="simple">
+<li><p>lightpreview: add <code class="docutils literal notranslate"><span class="pre">.lit</span></code> file loading</p></li>
+<li><p>initial <a class="reference internal" href="maputil.html"><span class="doc">maputil</span></a> util planned to be for manipulating .map files with lua scripting</p></li>
+<li><p>initial multiple bounce support in <code class="docutils literal notranslate"><span class="pre">light</span></code> with <a class="reference internal" href="light.html#worldspawn-key-_bounce"><code class="xref std std-worldspawn-key docutils literal notranslate"><span class="pre">_bounce</span></code></a></p></li>
+</ul>
+<p>Other notes:</p>
+<ul class="simple">
+<li><p>VS runtime for the Windows builds: <a class="reference external" href="https://aka.ms/vs/17/release/vc_redist.x64.exe">https://aka.ms/vs/17/release/vc_redist.x64.exe</a></p></li>
+<li><p>Documentation is now at: <a class="reference external" href="https://ericw-tools.readthedocs.io">https://ericw-tools.readthedocs.io</a></p></li>
+</ul>
+</section>
+<section id="alpha2">
+<h2>2.0.0-alpha2<a class="headerlink" href="#alpha2" title="Link to this heading">¶</a></h2>
+<p>This is the second alpha release of our “dev builds”, focusing on Quake 2 support.</p>
+<p>Quake mappers will probably want to stick to the previous v0.18.2-rc1 release.</p>
+<p>Fixes since alpha1:</p>
+<ul class="simple">
+<li><p>fix blown out lightmaps with bounce and lightstyles (2e0e23622bddb533830168dd8e77cb49fe6395a9)</p></li>
+<li><p>fix lightstyles being deleted if the map leaks (9d7f83a46af034d256bcb966323847e319dc67be)</p></li>
+<li><p>fix surface lights not illuminating the back faces of lit water (b71a4ebaf172d8570ae42c2d15a14e3991fb919e)</p></li>
+</ul>
+<p>Additions since alpha1:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="light.html#bmodel-key-_light_twosided"><code class="xref std std-bmodel-key docutils literal notranslate"><span class="pre">_light_twosided</span></code></a> bmodel key for enabling two-sided surfaces to receive light from either direction, mostly for Q2 opaque lit water. We might enable this implicitly on Q2 warp surfaces in the future, as we currently do on Q1 lit (opaque) water.  (b893e67309dc9556fa581e9a0a1d69b68782e40c)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_tex_saturation_boost</span> <span class="pre">1</span></code> worldspawn key (light) for boosting texture saturation in bounce calculations, to emulate vanilla Q2 tools (44dadd87b29899920afb23bf5472338f330a6ea1)</p></li>
+</ul>
+<p>Other notes:</p>
+<ul class="simple">
+<li><p>VS runtime for the Windows builds: <a class="reference external" href="https://aka.ms/vs/17/release/vc_redist.x64.exe">https://aka.ms/vs/17/release/vc_redist.x64.exe</a></p></li>
+<li><p>Documentation is now at: <a class="reference external" href="https://ericw-tools.readthedocs.io">https://ericw-tools.readthedocs.io</a></p></li>
+</ul>
+</section>
+<section id="alpha1">
+<h2>2.0.0-alpha1<a class="headerlink" href="#alpha1" title="Link to this heading">¶</a></h2>
+<p>This is the first alpha release of our “dev builds”, featuring Quake 2 support, including some features for the remaster (<a class="reference internal" href="light.html#cmdoption-light-lightgrid"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-lightgrid</span></code></a>, <a class="reference internal" href="light.html#cmdoption-light-world_units_per_luxel"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-world_units_per_luxel</span></code></a>, <a class="reference internal" href="light.html#cmdoption-light-wrnormals"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-wrnormals</span></code></a>).</p>
+<p>Quake mappers will probably want to stick to the previous v0.18.2-rc1 release.</p>
+<p>To get started for Q2, pass <a class="reference internal" href="qbsp.html#cmdoption-qbsp-q2bsp"><code class="xref std std-option docutils literal notranslate"><span class="pre">qbsp</span> <span class="pre">-q2bsp</span></code></a> to qbsp.</p>
+<p>Some known issues which we hope to address before a final 2.0.0 release:</p>
+<ul class="simple">
+<li><p>performance regressions from the previous release</p></li>
+<li><p>Quake maps are compiling with elevated stats (faces, clipnodes, etc.) compared to the previous release</p></li>
+<li><p><a class="reference internal" href="lightpreview.html"><span class="doc">lightpreview</span></a> gui tool is heavily WIP and only packaged in the Windows build for now</p></li>
+<li><p>Bounce lighting differs substantially from the previous stable release</p></li>
+<li><p>Improved documentation of new features / changelog</p></li>
+</ul>
+<p>Other notes:</p>
+<ul class="simple">
+<li><p>VS runtime for the Windows builds: <a class="reference external" href="https://aka.ms/vs/17/release/vc_redist.x64.exe">https://aka.ms/vs/17/release/vc_redist.x64.exe</a></p></li>
+<li><p>Documentation is now at: <a class="reference external" href="https://ericw-tools.readthedocs.io">https://ericw-tools.readthedocs.io</a></p></li>
+</ul>
+</section>
 <section id="upcoming">
 <h2>Upcoming<a class="headerlink" href="#upcoming" title="Link to this heading">¶</a></h2>
 <section id="note">
@@ -452,8 +612,8 @@ only welds to itself.</p>
 <li><p>Windows builds are 64-bit only for this release. I’m planning to restore 32-bit support but dropping it for this release made a dependency update easier. Not sure how many users this affects - let me know if it is a problem for you.</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3>Bug fixes<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<section id="id13">
+<h3>Bug fixes<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>qbsp: make origin brushes not use hiprotate bounds expansion (c30a0a4)</p></li>
 <li><p>qbsp: fix external maps with no worldspawn brushes (5e74b4d)</p></li>
@@ -463,8 +623,8 @@ only welds to itself.</p>
 <li><p>light: fix “unexpected geomID” error with bounce (dca61f8)</p></li>
 </ul>
 </section>
-<section id="id11">
-<h3>Enhancements<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<section id="id14">
+<h3>Enhancements<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>qbsp: initial multithreading support</p></li>
 <li><p>qbsp: experimental Half-Life support (8936594)</p></li>
@@ -493,8 +653,8 @@ only welds to itself.</p>
 </section>
 <section id="ericw-tools-0-18-2-rc1">
 <h2>2019-03-25 ericw-tools 0.18.2-rc1<a class="headerlink" href="#ericw-tools-0-18-2-rc1" title="Link to this heading">¶</a></h2>
-<section id="id12">
-<h3>Bug fixes<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<section id="id15">
+<h3>Bug fixes<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>qbsp: fix “_mirrorinside” on bmodels</p></li>
 <li><p>qbsp: fix t-junctions on bmodels (fixes sparkles, lightmap seams, phong shading)</p></li>
@@ -505,8 +665,8 @@ only welds to itself.</p>
 This fixes HOMs appearing when a map was vised. (#261)</p></li>
 </ul>
 </section>
-<section id="id13">
-<h3>Features<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<section id="id16">
+<h3>Features<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>qbsp: support a hybrid Valve 220 texturing + q2/q3 surface flags .map format</p></li>
 <li><p>qbsp: added -worldextent option for large maps (deault=65536, meaning +/-65536 units):</p></li>
@@ -724,8 +884,8 @@ Disable with “-novisapprox”.</p></li>
 <li><p>qbsp: add -objexport flag</p></li>
 </ul>
 </section>
-<section id="id14">
-<h3>Bugfixes<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<section id="id17">
+<h3>Bugfixes<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>vis: fix ambient sounds when using func_detail, broken in tyrutils-ericw-v0.15.3</p></li>
 </ul>
@@ -733,8 +893,8 @@ Disable with “-novisapprox”.</p></li>
 </section>
 <section id="tyrutils-ericw-0-15-4-release">
 <h2>2015-12-10 TyrUtils-ericw 0.15.4 release<a class="headerlink" href="#tyrutils-ericw-0-15-4-release" title="Link to this heading">¶</a></h2>
-<section id="id15">
-<h3>New features<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<section id="id18">
+<h3>New features<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>light: new “-parse_escape_sequences” command-line flag.
 The “b” escape sequence toggles red text on/off, you can use this
@@ -748,8 +908,8 @@ suns on the top hemisphere.)</p></li>
 <li><p>build: support compiling with Visual Studio</p></li>
 </ul>
 </section>
-<section id="id16">
-<h3>Bugfixes<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<section id="id19">
+<h3>Bugfixes<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>light: fix antilights (broken in last release)</p></li>
 <li><p>light: fix _mincolor to accept 0-1 float colors</p></li>
@@ -822,18 +982,18 @@ _deviance is set.</p></li>
 <li><p>light: fix for always generating a .lit file when surface lights are used</p></li>
 </ul>
 </section>
-<section id="id17">
-<h2>2015-04-29 TyrUtils-ericw snapshot<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
+<section id="id20">
+<h2>2015-04-29 TyrUtils-ericw snapshot<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>qbsp: fix broken -onlyents flag</p></li>
 <li><p>qbsp: fix texture offset on rotate_object, so they match in the
 editor. Added “-oldrottex” flag to revert to old behaviour. From txqbsp-xt.</p></li>
 </ul>
 </section>
-<section id="id18">
-<h2>2015-04-27 TyrUtils-ericw snapshot<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h2>
-<section id="id19">
-<h3>new features<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<section id="id21">
+<h2>2015-04-27 TyrUtils-ericw snapshot<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h2>
+<section id="id22">
+<h3>new features<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>light: fence texture tracing, for bmodels with “_shadow” “1”</p></li>
 <li><p>light: surface light support via “_surface” “texturename” light key</p></li>
@@ -848,8 +1008,8 @@ editor. Added “-oldrottex” flag to revert to old behaviour. From txqbsp-xt.<
 <li><p>light: accept “_sunlight_mangle” as an alternative for “_sun_mangle”</p></li>
 </ul>
 </section>
-<section id="id20">
-<h3>other<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<section id="id23">
+<h3>other<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>all: increase stack size to 8MB. Fixes qbsp crash with bbin1.map on Windows,
 light crashes.</p></li>
@@ -871,28 +1031,28 @@ is meaningful for the targetting entity (e.g. a monster).</p></li>
 <li><p>light: support “_dirt” “-1” on bmodels to disable dirtmapping</p></li>
 </ul>
 </section>
-<section id="id21">
-<h2>2015-02-24 TyrUtils-ericw snapshot<a class="headerlink" href="#id21" title="Link to this heading">¶</a></h2>
+<section id="id24">
+<h2>2015-02-24 TyrUtils-ericw snapshot<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>light: _sunlight2 (sky light/light dome) support from q3map2</p></li>
 <li><p>light: _sunlight_penumbra (deviance) from q3map2</p></li>
 </ul>
 </section>
-<section id="id22">
-<h2>2015-01-31 TyrUtils-ericw snapshot<a class="headerlink" href="#id22" title="Link to this heading">¶</a></h2>
+<section id="id25">
+<h2>2015-01-31 TyrUtils-ericw snapshot<a class="headerlink" href="#id25" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>light: per-light dirtmapping control</p></li>
 </ul>
 </section>
-<section id="id23">
-<h2>2015-01-21 TyrUtils-ericw snapshot<a class="headerlink" href="#id23" title="Link to this heading">¶</a></h2>
+<section id="id26">
+<h2>2015-01-21 TyrUtils-ericw snapshot<a class="headerlink" href="#id26" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>light: revert trace change in TyrUtils 0.7 that was causing artifacts.
 fix bug in determining trace hitpoint</p></li>
 </ul>
 </section>
-<section id="id24">
-<h2>2015-01-19 TyrUtils-ericw snapshot<a class="headerlink" href="#id24" title="Link to this heading">¶</a></h2>
+<section id="id27">
+<h2>2015-01-19 TyrUtils-ericw snapshot<a class="headerlink" href="#id27" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>light: handle colours in the range 0-1</p></li>
 <li><p>light: ambient occlusion / dirtmapping from q3map2 support</p></li>
@@ -1034,14 +1194,14 @@ qbsp.txt for further details.</p></li>
         
         <div class="related-pages">
           
-          <a class="prev-page" href="lightpreview.html">
+          <a class="prev-page" href="bspx.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">lightpreview</div>
+                <div class="title">BSPX Lumps</div>
                 
               </div>
             </a>
@@ -1076,43 +1236,54 @@ qbsp.txt for further details.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#alpha10">2.0.0-alpha10</a><ul>
+<li><a class="reference internal" href="#alpha11">2.0.0-alpha11</a><ul>
 <li><a class="reference internal" href="#changes">Changes</a></li>
 <li><a class="reference internal" href="#features">Features</a></li>
 <li><a class="reference internal" href="#bug-fixes">Bug fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alpha10">2.0.0-alpha10</a><ul>
+<li><a class="reference internal" href="#id1">Changes</a></li>
+<li><a class="reference internal" href="#id2">Features</a></li>
+<li><a class="reference internal" href="#id3">Bug fixes</a></li>
 <li><a class="reference internal" href="#developer-changes">Developer Changes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#alpha9">2.0.0-alpha9</a><ul>
-<li><a class="reference internal" href="#id1">Changes</a></li>
-<li><a class="reference internal" href="#id2">Features</a></li>
-<li><a class="reference internal" href="#id3">Bug fixes</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#alpha8">2.0.0-alpha8</a><ul>
 <li><a class="reference internal" href="#id4">Changes</a></li>
 <li><a class="reference internal" href="#id5">Features</a></li>
 <li><a class="reference internal" href="#id6">Bug fixes</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#alpha7">2.0.0-alpha7</a><ul>
+<li><a class="reference internal" href="#alpha8">2.0.0-alpha8</a><ul>
 <li><a class="reference internal" href="#id7">Changes</a></li>
 <li><a class="reference internal" href="#id8">Features</a></li>
 <li><a class="reference internal" href="#id9">Bug fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alpha7">2.0.0-alpha7</a><ul>
+<li><a class="reference internal" href="#id10">Changes</a></li>
+<li><a class="reference internal" href="#id11">Features</a></li>
+<li><a class="reference internal" href="#id12">Bug fixes</a></li>
 <li><a class="reference internal" href="#enhancements">Enhancements</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#alpha6">2.0.0-alpha6</a></li>
+<li><a class="reference internal" href="#alpha5">2.0.0-alpha5</a></li>
+<li><a class="reference internal" href="#alpha4">2.0.0-alpha4</a></li>
+<li><a class="reference internal" href="#alpha3">2.0.0-alpha3</a></li>
+<li><a class="reference internal" href="#alpha2">2.0.0-alpha2</a></li>
+<li><a class="reference internal" href="#alpha1">2.0.0-alpha1</a></li>
 <li><a class="reference internal" href="#upcoming">Upcoming</a><ul>
 <li><a class="reference internal" href="#note">Note</a></li>
-<li><a class="reference internal" href="#id10">Bug fixes</a></li>
-<li><a class="reference internal" href="#id11">Enhancements</a></li>
+<li><a class="reference internal" href="#id13">Bug fixes</a></li>
+<li><a class="reference internal" href="#id14">Enhancements</a></li>
 <li><a class="reference internal" href="#removed">Removed</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ericw-tools-0-18-2-rc1">2019-03-25 ericw-tools 0.18.2-rc1</a><ul>
-<li><a class="reference internal" href="#id12">Bug fixes</a></li>
-<li><a class="reference internal" href="#id13">Features</a></li>
+<li><a class="reference internal" href="#id15">Bug fixes</a></li>
+<li><a class="reference internal" href="#id16">Features</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ericw-tools-0-18-1">2018-04-05 ericw-tools 0.18.1</a></li>
@@ -1134,30 +1305,30 @@ qbsp.txt for further details.</p></li>
 <li><a class="reference internal" href="#tyrutils-ericw-0-15-6-release">2016-06-17 TyrUtils-ericw 0.15.6 release</a></li>
 <li><a class="reference internal" href="#tyrutils-ericw-0-15-5-release">2016-06-10 TyrUtils-ericw 0.15.5 release</a><ul>
 <li><a class="reference internal" href="#new-features">New features</a></li>
-<li><a class="reference internal" href="#id14">Bugfixes</a></li>
+<li><a class="reference internal" href="#id17">Bugfixes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tyrutils-ericw-0-15-4-release">2015-12-10 TyrUtils-ericw 0.15.4 release</a><ul>
-<li><a class="reference internal" href="#id15">New features</a></li>
-<li><a class="reference internal" href="#id16">Bugfixes</a></li>
+<li><a class="reference internal" href="#id18">New features</a></li>
+<li><a class="reference internal" href="#id19">Bugfixes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tyrutils-ericw-0-15-3-release">2015-10-26 TyrUtils-ericw 0.15.3 release</a></li>
 <li><a class="reference internal" href="#tyrutils-ericw-0-15-2-release">2015-08-09 TyrUtils-ericw 0.15.2 release</a></li>
 <li><a class="reference internal" href="#tyrutils-ericw-0-15-1-release">2015-07-09 TyrUtils-ericw 0.15.1 release</a></li>
 <li><a class="reference internal" href="#tyrutils-ericw-snapshot">2015-05-01 TyrUtils-ericw snapshot</a></li>
-<li><a class="reference internal" href="#id17">2015-04-29 TyrUtils-ericw snapshot</a></li>
-<li><a class="reference internal" href="#id18">2015-04-27 TyrUtils-ericw snapshot</a><ul>
-<li><a class="reference internal" href="#id19">new features</a></li>
+<li><a class="reference internal" href="#id20">2015-04-29 TyrUtils-ericw snapshot</a></li>
+<li><a class="reference internal" href="#id21">2015-04-27 TyrUtils-ericw snapshot</a><ul>
+<li><a class="reference internal" href="#id22">new features</a></li>
 <li><a class="reference internal" href="#convenience">convenience</a></li>
-<li><a class="reference internal" href="#id20">other</a></li>
+<li><a class="reference internal" href="#id23">other</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#tyrutils-ericw-shapshot">2015-03-05 TyrUtils-ericw shapshot</a></li>
-<li><a class="reference internal" href="#id21">2015-02-24 TyrUtils-ericw snapshot</a></li>
-<li><a class="reference internal" href="#id22">2015-01-31 TyrUtils-ericw snapshot</a></li>
-<li><a class="reference internal" href="#id23">2015-01-21 TyrUtils-ericw snapshot</a></li>
-<li><a class="reference internal" href="#id24">2015-01-19 TyrUtils-ericw snapshot</a></li>
+<li><a class="reference internal" href="#id24">2015-02-24 TyrUtils-ericw snapshot</a></li>
+<li><a class="reference internal" href="#id25">2015-01-31 TyrUtils-ericw snapshot</a></li>
+<li><a class="reference internal" href="#id26">2015-01-21 TyrUtils-ericw snapshot</a></li>
+<li><a class="reference internal" href="#id27">2015-01-19 TyrUtils-ericw snapshot</a></li>
 <li><a class="reference internal" href="#tyrutils-v0-15">2014-02-16 TyrUtils v0.15</a></li>
 <li><a class="reference internal" href="#tyrutils-v0-14">2013-10-03 TyrUtils v0.14</a></li>
 <li><a class="reference internal" href="#tyrutils-v0-13">2013-09-30 TyrUtils v0.13</a></li>

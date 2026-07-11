@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="bsputil" href="bsputil.html" /><link rel="prev" title="light" href="light.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="lightpreview" href="lightpreview.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>bspinfo - ericw-tools documentation</title>
+        <title>BSPX Lumps - ericw-tools documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -191,7 +191,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -215,11 +215,11 @@
 <li class="toctree-l1"><a class="reference internal" href="qbsp.html">qbsp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="vis.html">vis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="light.html">light</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">bspinfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bspinfo.html">bspinfo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bsputil.html">bsputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maputil.html">maputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lightpreview.html">lightpreview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bspx.html">BSPX Lumps</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">BSPX Lumps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -241,7 +241,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/bspinfo.rst.txt" title="View this page">
+  <a class="muted-link" href="_sources/bspx.rst.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -255,63 +255,45 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="bspinfo">
-<h1>bspinfo<a class="headerlink" href="#bspinfo" title="Link to this heading">¶</a></h1>
-<p>bspinfo - print basic information about a Quake BSP file</p>
-<section id="synopsis">
-<h2>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading">¶</a></h2>
-<p><strong>bspinfo</strong> BSPFILE [BSPFILES]</p>
-</section>
-<section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Link to this heading">¶</a></h2>
-<p><strong>bspinfo</strong> will print various info about each .bsp file:</p>
-<ul class="simple">
-<li><p>BSP type</p></li>
-<li><p>list of BSP lumps, the number of objects, and the total size in bytes</p></li>
-<li><p>list of BSPX lumps and their sizes in bytes</p></li>
-</ul>
-<p>For the purpose of previewing lightmaps in Blender, it will also pack the lightmaps into an atlas and output
-the following:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">mapname.bsp.geometry.obj</span></code> containing the BSP faces plus the lightmap UV’s</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mapname.bsp.lm_0.png</span></code>, <code class="docutils literal notranslate"><span class="pre">mapname.bsp.lm_1.png</span></code>, etc., containing a lightmap atlas per used style number</p></li>
-</ul>
-<p>For debugging, the bsp is also converted into a JSON representation and written to <code class="docutils literal notranslate"><span class="pre">mapname.bsp.json</span></code>.</p>
-</section>
-<section id="author">
-<h2>Author<a class="headerlink" href="#author" title="Link to this heading">¶</a></h2>
-<div class="line-block">
-<div class="line">Kevin Shanahan (aka Tyrann) - <a class="reference external" href="http://disenchant.net">http://disenchant.net</a></div>
-<div class="line">Eric Wasylishen</div>
-<div class="line">Based on source provided by id Software</div>
+          <section id="bspx-lumps">
+<h1>BSPX Lumps<a class="headerlink" href="#bspx-lumps" title="Link to this heading">¶</a></h1>
+<p>Here are the BSPX lumps we support. As with other Quake formats, byte order is little endian.</p>
+<dl class="std bspx-lump">
+<dt class="sig sig-object std" id="bspx-lump-FACENORMALS">
+<span class="sig-name descname"><span class="pre">FACENORMALS</span></span><a class="headerlink" href="#bspx-lump-FACENORMALS" title="Link to this definition">¶</a></dt>
+<dd><p>This adds per-face, per-vertex normals, tangents, and bitangents.</p>
+<p>For maps using <a class="reference internal" href="light.html#bmodel-key-_phong"><code class="xref std std-bmodel-key docutils literal notranslate"><span class="pre">_phong</span></code></a>, this allows in-engine dynamic lights to render
+with the same smooth/sharp edges that the baked lighting uses.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// first, a table of vectors which are referred to later (for compression)</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">num_unique_vecs</span><span class="p">;</span>
+<span class="n">float3</span><span class="w"> </span><span class="n">vecs</span><span class="p">[</span><span class="n">num_unique_vecs</span><span class="p">];</span>
+
+<span class="c1">// next, a per-vertex, per-face struct</span>
+<span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// these all index into `vecs`</span>
+<span class="w">      </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">normal_index</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">tangent_index</span><span class="p">;</span>
+<span class="w">      </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">bitangent_index</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span><span class="w"> </span><span class="n">pervertex</span><span class="p">[</span><span class="n">face</span><span class="o">-&gt;</span><span class="n">numedges</span><span class="p">];</span>
+<span class="p">}</span><span class="w"> </span><span class="n">perface</span><span class="p">[</span><span class="n">num_dfaces</span><span class="p">];</span>
+</pre></div>
 </div>
-</section>
-<section id="reporting-bugs">
-<h2>Reporting Bugs<a class="headerlink" href="#reporting-bugs" title="Link to this heading">¶</a></h2>
-<div class="line-block">
-<div class="line">Please post bug reports at
-<a class="reference external" href="https://github.com/ericwa/ericw-tools/issues">https://github.com/ericwa/ericw-tools/issues</a>.</div>
-<div class="line">Improvements to the documentation are welcome and encouraged.</div>
+<p>Generated with <a class="reference internal" href="light.html#cmdoption-light-wrnormals"><code class="xref std std-option docutils literal notranslate"><span class="pre">light</span> <span class="pre">-wrnormals</span></code></a>.</p>
+<p>Supported engines: Quake II (Enhanced).</p>
+<p>See also, <code class="docutils literal notranslate"><span class="pre">VERTEXNORMALS</span></code> (which we don’t support).</p>
+</dd></dl>
+
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>This list is incomplete…</p>
 </div>
-</section>
-<section id="copyright">
-<h2>Copyright<a class="headerlink" href="#copyright" title="Link to this heading">¶</a></h2>
-<div class="line-block">
-<div class="line">Copyright (C) 2017 Eric Wasylishen</div>
-<div class="line">Copyright (C) 2013 Kevin Shanahan</div>
-<div class="line">Copyright (C) 1997 id Software</div>
-<div class="line">License GPLv2+: GNU GPL version 2 or later</div>
-<div class="line">&lt;<a class="reference external" href="http://gnu.org/licenses/gpl2.html">http://gnu.org/licenses/gpl2.html</a>&gt;.</div>
-</div>
-<p>This is free software: you are free to change and redistribute it. There
-is NO WARRANTY, to the extent permitted by law.</p>
-</section>
 </section>
 
         </article>
@@ -319,23 +301,23 @@ is NO WARRANTY, to the extent permitted by law.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="bsputil.html">
+          <a class="next-page" href="changelog.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">bsputil</div>
+                <div class="title">Changelog</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="light.html">
+          <a class="prev-page" href="lightpreview.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">light</div>
+                <div class="title">lightpreview</div>
                 
               </div>
             </a>
@@ -357,31 +339,8 @@ is NO WARRANTY, to the extent permitted by law.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">bspinfo</a><ul>
-<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li><a class="reference internal" href="#description">Description</a></li>
-<li><a class="reference internal" href="#author">Author</a></li>
-<li><a class="reference internal" href="#reporting-bugs">Reporting Bugs</a></li>
-<li><a class="reference internal" href="#copyright">Copyright</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

@@ -219,6 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="bsputil.html">bsputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maputil.html">maputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lightpreview.html">lightpreview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bspx.html">BSPX Lumps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -1378,10 +1379,14 @@ with the first five letters “light”. E.g. “light”, “light_globe”,
 <h3>Point Lights<a class="headerlink" href="#point-lights" title="Link to this heading">¶</a></h3>
 <dl class="std light-key">
 <dt class="sig sig-object std" id="light-key-light">
-<span class="sig-name descname"><span class="pre">&quot;light&quot;</span></span><span class="s"> </span><span class="s"><span class="pre">&quot;n&quot;</span></span><a class="headerlink" href="#light-key-light" title="Link to this definition">¶</a></dt>
-<dd><p>Set the light intensity. Negative values are also allowed and will
+<span class="sig-name descname"><span class="pre">&quot;light&quot;</span></span><span class="s"> </span><span class="s"><span class="pre">&quot;[r</span> <span class="pre">g</span> <span class="pre">b]</span> <span class="pre">[n]&quot;</span></span><a class="headerlink" href="#light-key-light" title="Link to this definition">¶</a></dt>
+<dd><p>The common form is one value, n, which sets the light intensity.
+Negative values are also allowed and will
 cause the entity to subtract light cast by other entities. Default
 300.</p>
+<p>For Half-Life compatibility, you can specify a color here before the light value,
+in the same format as <a class="reference internal" href="#light-key-_color"><code class="xref std std-light-key docutils literal notranslate"><span class="pre">_color</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">_color</span></code> takes priority if a color is set in both places.</p>
 </dd></dl>
 
 <dl class="std light-key">
@@ -1787,6 +1792,10 @@ for lighting rotators, doors, etc.</p>
 <p>In order for this light to cast light on a bmodel, there needs to be a least 1 bit in common between
 <a class="reference internal" href="#light-key-_light_channel_mask"><code class="xref std std-light-key docutils literal notranslate"><span class="pre">_light_channel_mask</span></code></a> and the receiving bmodel’s <a class="reference internal" href="#bmodel-key-_object_channel_mask"><code class="xref std std-bmodel-key docutils literal notranslate"><span class="pre">_object_channel_mask</span></code></a> (i.e. the bitwise AND must be nonzero).</p>
 <p>Default 1.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lightgrids only receive light channel mask 1.</p>
+</div>
 </dd></dl>
 
 <dl class="std light-key">

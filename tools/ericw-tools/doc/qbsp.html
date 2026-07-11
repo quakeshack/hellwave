@@ -219,6 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="bsputil.html">bsputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maputil.html">maputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lightpreview.html">lightpreview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bspx.html">BSPX Lumps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -821,8 +822,8 @@ use all available hardware threads.</p>
 <span class="sig-name descname"><span class="pre">-aliasdef</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;aliases.def&gt;</span> <span class="pre">[...]</span></span><a class="headerlink" href="#cmdoption-qbsp-aliasdef" title="Link to this definition">¶</a></dt>
 <dd><p>Adds alias definition files, which can transform entities in the .map into other entities.</p>
 <p>For example, given this alias definition file:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">aliases.def</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">aliases.def</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>misc_torch1 // source classname
 {
 &quot;classname&quot; &quot;misc_model&quot; // classname to transform into
@@ -1008,8 +1009,8 @@ exit.</p>
 <span class="sig-name descname"><span class="pre">*lava</span></span><a class="headerlink" href="#texture-lava" title="Link to this definition">¶</a></dt>
 <dt class="sig sig-object std" id="texture-0">
 <span class="sig-name descname"><span class="pre">*</span></span><a class="headerlink" href="#texture-0" title="Link to this definition">¶</a></dt>
-<dd><p>Names beginning with an asterisk are liquids. A prefix of <code class="docutils literal notranslate"><span class="pre">*slime</span></code>
-indicates slime, <code class="docutils literal notranslate"><span class="pre">*lava</span></code> is for lava and anything else beginning with
+<dd><p>In all Q1-like games, names beginning with an asterisk are liquids. A prefix of <code class="docutils literal notranslate"><span class="pre">*slime</span></code>
+indicates slime, <code class="docutils literal notranslate"><span class="pre">*lava</span></code> is for lava, and anything else beginning with
 <code class="docutils literal notranslate"><span class="pre">*</span></code> will have contents as water.</p>
 </dd></dl>
 
@@ -1061,6 +1062,71 @@ expand the bounds of it a bit using clip brushes so it doesn’t get vis
 culled.</p>
 </dd></dl>
 
+<section id="half-life-bsp-specifc">
+<h3>Half-Life BSP Specifc<a class="headerlink" href="#half-life-bsp-specifc" title="Link to this heading">¶</a></h3>
+<p>If <a class="reference internal" href="#cmdoption-qbsp-hlbsp"><code class="xref std std-option docutils literal notranslate"><span class="pre">-hlbsp</span></code></a> is in use, the following exta texture prefixes are recognized:</p>
+<dl class="std texture">
+<dt class="sig sig-object std" id="texture-1">
+<span class="sig-name descname"><span class="pre">!slime</span></span><a class="headerlink" href="#texture-1" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="texture-2">
+<span class="sig-name descname"><span class="pre">!lava</span></span><a class="headerlink" href="#texture-2" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="texture-3">
+<span class="sig-name descname"><span class="pre">!</span></span><a class="headerlink" href="#texture-3" title="Link to this definition">¶</a></dt>
+<dd><p>These act the same as names beginning with <code class="docutils literal notranslate"><span class="pre">*</span></code> and create liquids.</p>
+</dd></dl>
+
+<dl class="std texture">
+<dt class="sig sig-object std" id="texture-cur_0">
+<span class="sig-name descname"><span class="pre">!cur_0</span></span><a class="headerlink" href="#texture-cur_0" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="texture-cur_90">
+<span class="sig-name descname"><span class="pre">!cur_90</span></span><a class="headerlink" href="#texture-cur_90" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="texture-cur_180">
+<span class="sig-name descname"><span class="pre">!cur_180</span></span><a class="headerlink" href="#texture-cur_180" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="texture-cur_270">
+<span class="sig-name descname"><span class="pre">!cur_270</span></span><a class="headerlink" href="#texture-cur_270" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="texture-cur_up">
+<span class="sig-name descname"><span class="pre">!cur_up</span></span><a class="headerlink" href="#texture-cur_up" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object std" id="texture-cur_dwn">
+<span class="sig-name descname"><span class="pre">!cur_dwn</span></span><a class="headerlink" href="#texture-cur_dwn" title="Link to this definition">¶</a></dt>
+<dd><p>These prefixes generate water with the given current direction:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Content type</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CONTENTS_CURRENT_0</p></td>
+<td><p>-9</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONTENTS_CURRENT_90</p></td>
+<td><p>-10</p></td>
+</tr>
+<tr class="row-even"><td><p>CONTENTS_CURRENT_180</p></td>
+<td><p>-11</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONTENTS_CURRENT_270</p></td>
+<td><p>-12</p></td>
+</tr>
+<tr class="row-even"><td><p>CONTENTS_CURRENT_UP</p></td>
+<td><p>-13</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONTENTS_CURRENT_DOWN</p></td>
+<td><p>-14</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>During the BSP process, they act like water with extra modifier flags.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Different from the vanilla HL compiler, we don’t generate faces between different <code class="docutils literal notranslate"><span class="pre">CONTENTS_CURRENT_*</span></code> textured
+volumes.</p>
+</div>
+</dd></dl>
+
+</section>
 </section>
 <section id="external-map-prefab-support">
 <h2>External Map Prefab Support<a class="headerlink" href="#external-map-prefab-support" title="Link to this heading">¶</a></h2>
@@ -1093,7 +1159,7 @@ configure the final entity type. e.g. if you set
 <dt class="sig sig-object std" id="other-key-_external_map_classname">
 <span class="sig-name descname"><span class="pre">_external_map_classname</span></span><a class="headerlink" href="#other-key-_external_map_classname" title="Link to this definition">¶</a></dt>
 <dd><p>What entity you want the external map to turn in to. You can use
-internal qbsp entity types such as <code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail</span></code>, or a regular bmodel
+internal qbsp entity types such as <a class="reference internal" href="#classname-func_detail"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail</span></code></a>, or a regular bmodel
 classname like “func_wall” or “func_door”.</p>
 </dd></dl>
 
@@ -1176,8 +1242,21 @@ extra information needed by vis to compute the potentially visible set
 (PVS) for the map/bsp. So you will also need a vis util capable of
 processing the PRT2 file format.</p>
 </section>
-<section id="detail-variants">
-<h2>Detail Variants<a class="headerlink" href="#detail-variants" title="Link to this heading">¶</a></h2>
+<section id="compiler-internal-bmodels">
+<h2>Compiler-internal bmodels<a class="headerlink" href="#compiler-internal-bmodels" title="Link to this heading">¶</a></h2>
+<dl class="std classname">
+<dt class="sig sig-object std" id="classname-func_group">
+<span class="sig-name descname"><span class="pre">func_group</span></span><a class="headerlink" href="#classname-func_group" title="Link to this definition">¶</a></dt>
+<dd><p>Bmodel that has no effect; qbsp moves the brushes back into the worldspawn entity.</p>
+<p>The usefulness comes from the ability to set <a class="reference internal" href="#model-entity-keys"><span class="std std-ref">Model Entity Keys</span></a> on the brushes inside the func_group.</p>
+</dd></dl>
+
+<dl class="std classname">
+<dt class="sig sig-object std" id="classname-func_detail">
+<span class="sig-name descname"><span class="pre">func_detail</span></span><a class="headerlink" href="#classname-func_detail" title="Link to this definition">¶</a></dt>
+<dd><p>Solid detail. Can’t be seen inside, splits world faces. Doesn’t seal map.</p>
+</dd></dl>
+
 <dl class="std classname">
 <dt class="sig sig-object std" id="classname-func_detail_illusionary">
 <span class="sig-name descname"><span class="pre">func_detail_illusionary</span></span><a class="headerlink" href="#classname-func_detail_illusionary" title="Link to this definition">¶</a></dt>
@@ -1211,12 +1290,16 @@ solid and block gunfire.</p>
 
 </section>
 <section id="model-entity-keys">
-<h2>Model Entity Keys<a class="headerlink" href="#model-entity-keys" title="Link to this heading">¶</a></h2>
+<span id="id1"></span><h2>Model Entity Keys<a class="headerlink" href="#model-entity-keys" title="Link to this heading">¶</a></h2>
 <dl class="std bmodel-key">
 <dt class="sig sig-object std" id="bmodel-key-_lmscale">
 <span class="sig-name descname"><span class="pre">&quot;_lmscale&quot;</span></span><span class="s"> </span><span class="s"><span class="pre">&quot;n&quot;</span></span><a class="headerlink" href="#bmodel-key-_lmscale" title="Link to this definition">¶</a></dt>
 <dd><p>Generates an LMSHIFT bspx lump for use by a light util. Note that
 both scaled and unscaled lighting will normally be used.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>This is broken since 2.0.0-alpha1</p>
+</div>
 </dd></dl>
 
 <dl class="std bmodel-key">
@@ -1224,16 +1307,19 @@ both scaled and unscaled lighting will normally be used.</p>
 <span class="sig-name descname"><span class="pre">&quot;_mirrorinside&quot;</span></span><span class="s"> </span><span class="s"><span class="pre">&quot;n&quot;</span></span><a class="headerlink" href="#bmodel-key-_mirrorinside" title="Link to this definition">¶</a></dt>
 <dd><p>Set to 1 to save mirrored inside faces for bmodels, so when the
 player view is inside the bmodel, they will still see the faces.
-(e.g. for func_water, or func_illusionary)</p>
+(e.g. for func_water, func_illusionary, <a class="reference internal" href="#classname-func_detail_illusionary"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_illusionary</span></code></a>, <a class="reference internal" href="#classname-func_detail_fence"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_fence</span></code></a>, etc.)</p>
 </dd></dl>
 
 <dl class="std bmodel-key">
 <dt class="sig sig-object std" id="bmodel-key-_chop_order">
 <span class="sig-name descname"><span class="pre">&quot;_chop_order&quot;</span></span><span class="s"> </span><span class="s"><span class="pre">&quot;n&quot;</span></span><a class="headerlink" href="#bmodel-key-_chop_order" title="Link to this definition">¶</a></dt>
-<dd><p>Customize the brush order, which affects which brush “wins” in the CSG phase when there are multiple overlapping
-brushes, since most .map editors don’t directly expose the brush order.</p>
-<p>Defaults to 0, brushes with higher values (equivalent to appearing later in the .map file) will clip away lower
-valued brushes.</p>
+<dd><p>Override the order of brushes in the map file, which affects which face “wins” in the CSG phase when there are
+multiple overlapping coplanar brushes. Provided since most .map editors don’t directly expose the brush order.</p>
+<p>All brushes are initially 0; setting this to 1 would make a brush appear after anything in the map file, and so
+clip away coplanar faces from other brushes.</p>
+<p>For example, you could make a <a class="reference internal" href="#classname-func_group"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_group</span></code></a> with “_chop_order” “1”, and apply it to a light fixture
+which is coplanar with a floor or ceiling, to ensure the light fixture is visible in-game, without going to the
+trouble of cutting a hole in the floor/ceiling for it.</p>
 </dd></dl>
 
 <dl class="std bmodel-key">
@@ -1251,10 +1337,20 @@ the specified hulls.</p>
 <dl class="std bmodel-key">
 <dt class="sig sig-object std" id="bmodel-key-_chop">
 <span class="sig-name descname"><span class="pre">&quot;_chop&quot;</span></span><span class="s"> </span><span class="s"><span class="pre">&quot;n&quot;</span></span><a class="headerlink" href="#bmodel-key-_chop" title="Link to this definition">¶</a></dt>
-<dd><p>Set to 0 to prevent these brushes from being chopped.</p>
+<dd><p>Set to 0 to prevent these brushes from being chopped; this is an alias for setting <a class="reference internal" href="#bmodel-key-_chop_order"><code class="xref std std-bmodel-key docutils literal notranslate"><span class="pre">_chop_order</span></code></a> to 1.</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">Deprecated since version 2.0.0: </span>Prefer the more flexible <a class="reference internal" href="#bmodel-key-_chop_order"><code class="xref std std-bmodel-key docutils literal notranslate"><span class="pre">_chop_order</span></code></a> instead.</p>
 </div>
+</dd></dl>
+
+<dl class="std bmodel-key">
+<dt class="sig sig-object std" id="bmodel-key-_noclipfaces">
+<span class="sig-name descname"><span class="pre">&quot;_noclipfaces&quot;</span></span><span class="s"> </span><span class="s"><span class="pre">&quot;n&quot;</span></span><a class="headerlink" href="#bmodel-key-_noclipfaces" title="Link to this definition">¶</a></dt>
+<dd><p>Set to 1 to suppress the usual qbsp behaviour where two touching brushes of the same content type will have the
+touching portion clipped away.</p>
+<p>This is useful for things that can be seen inside, such as <a class="reference internal" href="#classname-func_detail_illusionary"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_illusionary</span></code></a>,
+<a class="reference internal" href="#classname-func_detail_fence"><code class="xref std std-classname docutils literal notranslate"><span class="pre">func_detail_fence</span></code></a>, liquids, bmodels, etc.</p>
+<p>Behaviour is unspecified for coplanar faces; in 0.18 it caused z-fighting, and in 2.0.0-alpha it doesn’t currently.</p>
 </dd></dl>
 
 </section>
@@ -1434,10 +1530,13 @@ is NO WARRANTY, to the extent permitted by law.</p>
 <li><a class="reference internal" href="#description">Description</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 <li><a class="reference internal" href="#game-path-specification">Game Path Specification</a></li>
-<li><a class="reference internal" href="#special-texture-names">Special Texture Names</a></li>
+<li><a class="reference internal" href="#special-texture-names">Special Texture Names</a><ul>
+<li><a class="reference internal" href="#half-life-bsp-specifc">Half-Life BSP Specifc</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#external-map-prefab-support">External Map Prefab Support</a></li>
 <li><a class="reference internal" href="#detail-brush-support">Detail Brush Support</a></li>
-<li><a class="reference internal" href="#detail-variants">Detail Variants</a></li>
+<li><a class="reference internal" href="#compiler-internal-bmodels">Compiler-internal bmodels</a></li>
 <li><a class="reference internal" href="#model-entity-keys">Model Entity Keys</a></li>
 <li><a class="reference internal" href="#other-special-purpose-entities">Other Special-Purpose Entities</a></li>
 <li><a class="reference internal" href="#map-compatibility">Map Compatibility</a></li>

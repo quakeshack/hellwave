@@ -217,6 +217,7 @@
 <li class="toctree-l1"><a class="reference internal" href="bsputil.html">bsputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maputil.html">maputil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lightpreview.html">lightpreview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bspx.html">BSPX Lumps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
@@ -261,6 +262,69 @@
   <h2>Symbols</h2>
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    !
+
+        <ul>
+          <li><a href="qbsp.html#texture-3">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !cur_0
+
+        <ul>
+          <li><a href="qbsp.html#texture-cur_0">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !cur_180
+
+        <ul>
+          <li><a href="qbsp.html#texture-cur_180">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !cur_270
+
+        <ul>
+          <li><a href="qbsp.html#texture-cur_270">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !cur_90
+
+        <ul>
+          <li><a href="qbsp.html#texture-cur_90">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !cur_dwn
+
+        <ul>
+          <li><a href="qbsp.html#texture-cur_dwn">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !cur_up
+
+        <ul>
+          <li><a href="qbsp.html#texture-cur_up">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !lava
+
+        <ul>
+          <li><a href="qbsp.html#texture-2">texture name</a>
+</li>
+        </ul></li>
+        <li>
+    !slime
+
+        <ul>
+          <li><a href="qbsp.html#texture-1">texture name</a>
+</li>
+        </ul></li>
         <li>
     *
 
@@ -908,6 +972,8 @@
           <li><a href="qbsp.html#cmdoption-qbsp-lmscale">qbsp command line option</a>
 </li>
         </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     -lmshift
 
@@ -933,8 +999,6 @@
           <li><a href="qbsp.html#cmdoption-qbsp-logbmodels">qbsp command line option</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     -loghulls
 
@@ -1995,6 +2059,13 @@
 </li>
         </ul></li>
         <li>
+    _noclipfaces
+
+        <ul>
+          <li><a href="qbsp.html#bmodel-key-_noclipfaces">bmodel key</a>
+</li>
+        </ul></li>
+        <li>
     _nostaticlight
 
         <ul>
@@ -2501,6 +2572,8 @@
 </li>
           <li><a href="vis.html#bmodel-key-_noambient">_noambient</a>
 </li>
+          <li><a href="qbsp.html#bmodel-key-_noclipfaces">_noclipfaces</a>
+</li>
           <li><a href="light.html#bmodel-key-_object_channel_mask">_object_channel_mask</a>
 </li>
           <li><a href="light.html#bmodel-key-_phong">_phong</a>
@@ -2597,11 +2670,15 @@
     classname
 
         <ul>
+          <li><a href="qbsp.html#classname-func_detail">func_detail</a>
+</li>
           <li><a href="qbsp.html#classname-func_detail_fence">func_detail_fence</a>
 </li>
           <li><a href="qbsp.html#classname-func_detail_illusionary">func_detail_illusionary</a>
 </li>
           <li><a href="qbsp.html#classname-func_detail_wall">func_detail_wall</a>
+</li>
+          <li><a href="qbsp.html#classname-func_group">func_group</a>
 </li>
           <li><a href="qbsp.html#classname-func_illusionary_visblocker">func_illusionary_visblocker</a>
 </li>
@@ -2639,6 +2716,13 @@
   <table style="width: 100%" class="indextable genindextable"><tr>
     <td style="width: 33%; vertical-align: top;"><ul>
         <li>
+    func_detail
+
+        <ul>
+          <li><a href="qbsp.html#classname-func_detail">classname</a>
+</li>
+        </ul></li>
+        <li>
     func_detail_fence
 
         <ul>
@@ -2659,6 +2743,13 @@
 
         <ul>
           <li><a href="qbsp.html#classname-func_detail_wall">classname</a>
+</li>
+        </ul></li>
+        <li>
+    func_group
+
+        <ul>
+          <li><a href="qbsp.html#classname-func_group">classname</a>
 </li>
         </ul></li>
         <li>
@@ -3308,12 +3399,28 @@
           <li><a href="light.html#sunlight-key-targetname">sunlight entity key</a>
 </li>
         </ul></li>
-    </ul></td>
-    <td style="width: 33%; vertical-align: top;"><ul>
         <li>
     texture name
 
         <ul>
+          <li><a href="qbsp.html#texture-3">!</a>
+</li>
+          <li><a href="qbsp.html#texture-cur_0">!cur_0</a>
+</li>
+          <li><a href="qbsp.html#texture-cur_180">!cur_180</a>
+</li>
+          <li><a href="qbsp.html#texture-cur_270">!cur_270</a>
+</li>
+          <li><a href="qbsp.html#texture-cur_90">!cur_90</a>
+</li>
+          <li><a href="qbsp.html#texture-cur_dwn">!cur_dwn</a>
+</li>
+          <li><a href="qbsp.html#texture-cur_up">!cur_up</a>
+</li>
+          <li><a href="qbsp.html#texture-2">!lava</a>
+</li>
+          <li><a href="qbsp.html#texture-1">!slime</a>
+</li>
           <li><a href="qbsp.html#texture-0">*</a>
 </li>
           <li><a href="qbsp.html#texture-lava">*lava</a>

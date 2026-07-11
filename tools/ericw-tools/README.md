@@ -1,5 +1,8 @@
 ## ericw-tools
  - Website:         http://ericwa.github.io/ericw-tools
+ - Documentation:
+   - 2.0.0-alpha: https://ericw-tools.readthedocs.io
+   - 0.18: [qbsp](https://ericwa.github.io/ericw-tools/doc/qbsp.html), [vis](https://ericwa.github.io/ericw-tools/doc/vis.html), [light](https://ericwa.github.io/ericw-tools/doc/light.html), [bspinfo](https://ericwa.github.io/ericw-tools/doc/bspinfo.html), [bsputil](https://ericwa.github.io/ericw-tools/doc/bsputil.html)
  - Maintainer:      Eric Wasylishen (AKA ericw)
  - Email:           ewasylishen@gmail.com
 
@@ -38,51 +41,70 @@ source code.
 
 ## Compiling
 
-Dependencies: Embree 3.0+, TBB (TODO: version?), Sphinx (for building manuals)
+Required dependencies:
+- [Embree 4](https://github.com/RenderKit/embree)
+- [oneTBB](https://github.com/uxlfoundation/oneTBB)
 
-### Ubuntu
+Optional dependencies:
+- Python, Sphinx (for building manuals)
+- Qt 6 (for `lightpreview` GUI)
+
+Bundled dependencies:
+- [fmt](https://github.com/fmtlib/fmt)
+- [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
+- [nanobench](https://github.com/martinus/nanobench)
+- [pareto](https://github.com/alandefreitas/pareto)
+- [GoogleTest](https://github.com/google/googletest)
+- [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h)
+- [stb_image_write](https://github.com/nothings/stb/blob/master/stb_image_write.h)
+
+### Ubuntu 24.04
 
 NOTE: Builds using Ubuntu's embree packages produce a significantly slower `light` (i.e. over twice as slow) than ones released on Embree's GitHub. See `build-linux-64.sh` for a better method. 
 
-```
-sudo apt install libembree-dev libtbb-dev cmake build-essential g++
-sudo apt install python3-pip
-python3 -m pip install sphinx_rtd_theme
-export PATH="~/.local/bin/:$PATH"
+```bash
+sudo apt update
+sudo apt install libembree-dev libtbb-dev cmake build-essential g++ qt6-base-dev
 git clone --recursive https://github.com/ericwa/ericw-tools
 cd ericw-tools
 mkdir build
 cd build
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j 8
+
+# run tests
+./tests/tests
+
+# print qbsp help
+./qbsp/qbsp --help
+
+# launch lightpreview gui
+./lightpreview/lightpreview
 ```
 
-### Windows
+### Windows, obtaining required dependencies via vcpkg
 
-Example using vcpkg (32-bit build):
+Open a `cmd` window. First, obtain vcpkg and build the dependencies:
 
-```
-git clone --recursive https://github.com/ericwa/ericw-tools
-cd ericw-tools
-
-# creates a python virtual environment in the directory `sphinx-venv`
-# and install sphinx (for building the docs)
-py.exe -m venv sphinx-venv
-.\sphinx-venv\Scripts\Activate.ps1
-py.exe -m pip install -r docs/requirements.txt
-
+```bat
 git clone https://github.com/microsoft/vcpkg
-.\vcpkg\bootstrap-vcpkg.bat
-
-# NOTE: vcpkg builds for 32-bit by default
-# NOTE: takes 30+ minutes
-.\vcpkg\vcpkg install embree3
-mkdir build
-cd build
-
-# PowerShell syntax for getting current directory -
-# otherwise, replace with absolute path to "vcpkg/scripts/buildsystems/vcpkg.cmake"
-cmake .. -DCMAKE_TOOLCHAIN_FILE="$(pwd)/../vcpkg/scripts/buildsystems/vcpkg.cmake" -DCMAKE_GENERATOR_PLATFORM=Win32 -DSPHINX_EXECUTABLE="$(pwd)/../sphinx-venv/Scripts/sphinx-build.exe"
+cd vcpkg
+.\bootstrap-vcpkg.bat
+.\vcpkg.exe install embree tbb
+cd ..
 ```
+
+Next, clone the ericw-tools git repository + submodules:
+
+```bat
+git clone --recursive https://github.com/ericwa/ericw-tools
+```
+
+Open the `ericw-tools` folder in VS2022 (or higher) as a CMake project.
+
+Go to "Project -> CMake Settings". Under "CMake Toolchain File", press the "..." button and browse to `vcpkg\scripts\buildsystems\vcpkg.cmake`. Then press "Save" to save your CMakeSettings.json.
+
+Once CMake finishes, you should be able to select e.g. `qbsp.exe (qbsp\qbsp.exe)` in the "Select Startup Item" dropdown in the toolbar. (I had to restart VS).
 
 #### IDE Tips - CLion
 
@@ -91,16 +113,17 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE="$(pwd)/../vcpkg/scripts/buildsystems/vcpkg.cmak
 
   (see: https://youtrack.jetbrains.com/issue/CPP-29559/Clion-LLDB-does-not-break-on-SEH-exceptions-within-GTest)
 
-### macOS 10.15
+### macOS 10.15+
 
 ```
-brew install embree tbb
+brew install embree tbb qt@6 cmake
 python3 -m pip install sphinx_rtd_theme
 git clone --recursive https://github.com/ericwa/ericw-tools
 cd ericw-tools
 mkdir build
 cd build
-cmake .. -GXcode -DCMAKE_PREFIX_PATH="$(brew --prefix embree);$(brew --prefix tbb)"
+cmake .. -DCMAKE_PREFIX_PATH="$(brew --prefix embree);$(brew --prefix tbb)" -DCMAKE_BUILD_TYPE=Release
+make
 ```
 
 ## Credits
