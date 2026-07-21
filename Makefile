@@ -83,6 +83,7 @@ assets: engine maps
 		--include='*.bsp' \
 		--include='*.nav' \
 		--include='*.lit' \
+		--include='*.jpg' \
 		--exclude='*' \
 		engine/data/hellwave/maps/ dist/assets/maps/
 
