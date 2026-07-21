@@ -1,16 +1,16 @@
 [submodule "engine"]
 	path = engine
 	url = ../engine
-	branch = main
+	branch = menu-rework
 [submodule "game"]
 	path = game
 	url = ../game
-	branch = main
+	branch = menu-rework
 [submodule "hellwave-data"]
 	path = hellwave-data
 	url = ../hellwave-data
-	branch = main
+	branch = menu-rework
 [submodule "hellwave-game"]
 	path = hellwave-game
 	url = ../hellwave-game
-	branch = main
+	branch = menu-rework
